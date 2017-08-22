@@ -1,0 +1,48 @@
+<ng-container *ngIf="lists">
+	<div class="weui-cells no-border">
+		<div class="item" *ngFor="let v of lists">
+			<div class="weui-media-box weui-media-box_appmsg" routerLink="../{{v['gid']}}">
+				<div class="weui-media-box__hd">
+					<img src="{{v['corver']}}">
+				</div>
+				<div class="weui-media-box__bd">
+					<div class="weui-media-box__title">{{v['name']}}</div>
+					<div class="weui-media-box__desc">{{v['standard']}}</div>
+				</div>
+				<div class="weui-cell__ft">¥ 
+					<span *ngIf="v['grid']" class="out">{{v['price']*v['count']}} (兑换券)</span>
+					<span *ngIf="!v['grid']" class="price">{{v['price']*1000*v['count']/1000}}</span>
+				</div>
+			</div>
+			<div class="weui-media-box weui-media-box_appmsg option">
+				<div class="weui-media-box__hd">
+				</div>
+				<div class="weui-media-box__bd">
+					<div *ngIf="!v['grid']" style="display:flex;">
+						<span class="decr" (click)="changeCount(v, -1);">-</span>
+						<span class="count">{{v['count']}}</span>
+						<span class="incr" (click)="changeCount(v, 1)">+</span>
+					</div>
+				</div>
+				<div class="weui-cell__ft">
+					<img class="img-min-x" (click)="del(v.id)" src="assets/images/Order/cancel.png">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="fix-bottom-box">
+		<div class="fix-bottom-item">
+			<a class="weui-btn weui-btn_default" href="javascript:;">
+				总计： ¥<span class="total">{{total}}</span>
+			</a>
+			<a class="weui-btn weui-btn_confirm" style="max-width: 120px;" (click)="toOrder();">去结算</a>
+		</div>
+	</div>
+</ng-container>
+<div class="empty" *ngIf="!lists">
+	<img src="assets/images/Order/empty.png">
+	<p>您的购物车空空如也，快去选购商品吧~</p>
+	<div class="bottom-box">
+		<a class="weui-btn btn_primary" routerLink="/goods">去逛逛</a>
+	</div>
+</div>

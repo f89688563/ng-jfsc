@@ -1,0 +1,122 @@
+<form #form="ngForm" (ngSubmit)="onSave()" [@popIn]>
+	<!-- <input type="hidden" name="cid" value="{cid}" /> -->
+	<!-- <input type="hidden" name="openid" value="{wxinfo['openid']}" /> -->
+	<!-- <input type="hidden" name="avatar" value="{wxinfo['headimgurl']}" /> -->
+	<!-- <input type="hidden" name="nickname" value="{wxinfo['nickname']}" /> -->
+	<div class="weui-cells weui-cells_form weui-cells_select">
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">选择门店：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" [(ngModel)]="user.sid" name="sid" (change)="selectStore()" required>
+					<option *ngFor="let v of stores" value="{{v['id']}}">{{v['name']}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">选择导购：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" [(ngModel)]="user.pid" name="pid" required>
+					<ng-container *ngFor="let v of employs">
+						<option *ngIf="v['type']=='employ'" value="{{v['id']}}">{{v['owner']}}</option>
+					</ng-container>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">我的名字：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" name="username" [(ngModel)]="user.username" placeholder="请输入名字" required />
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">手机号：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="number" pattern="[0-9]*" name="phone" [(ngModel)]="user.phone" placeholder="请输入手机号" required />
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">密码：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="password" name="psw" [(ngModel)]="user.psw" placeholder="请输入密码" required />
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">手机品牌：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<select class="weui-select" name="mobile" [(ngModel)]="user.mobile" required>
+					<option *ngFor="let v of mobile_type" value="{{v}}">{{v}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">性别：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<select name="gender" class="weui-select" [(ngModel)]="user.gender" required>
+					<option value="0">男</option>
+					<option value="1">女</option>
+				</select>
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_switch">
+	        <div class="weui-cell__bd">是否阴历</div>
+	        <div class="weui-cell__ft">
+	            <input class="weui-switch" name="birthtype" [(ngModel)]="user.birthtype" value="'1'" type="checkbox" />
+	        </div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">生日：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="date" name="birthday" [(ngModel)]="user.birthday" placeholder="请选择出生日期" required />
+			</div>
+		</div>
+	</div>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">所在地区</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input type="text" class="weui-select" name="citys" [(ngModel)]="citys" (click)="selectCity()" readonly required>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">详细地址：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="text" name="address" [(ngModel)]="user.address" placeholder="请输入详细地址" required />
+			</div>
+		</div>
+	</div>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<textarea class="weui-textarea" name="remark" [(ngModel)]="user.remark" placeholder="请输入备注" rows="3"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="weui-cells__title" style="text-align: right;">
+		<a routerLink="/user/login">已有账户？去登陆</a>
+	</div>
+	<div class="weui-btn-area">
+		<input [class.weui-btn_disabled]="form.invalid" class="weui-btn weui-btn_primary" type="submit" value="登录" [disabled]="form.invalid" />
+	</div>
+</form>

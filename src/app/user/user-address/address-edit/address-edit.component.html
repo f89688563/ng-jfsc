@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">收货人</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" formControlName="username" maxlength="8" placeholder="请输入收货人">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">联系电话</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="number" pattern="[0-9]*" formControlName="phone" placeholder="请输入联系电话">
+			</div>
+		</div>
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">收货时间</label>
+			</div>
+			<div class="weui-cell__bd weui_cell_primary">
+				<input type="text" class="weui-select" [(ngModel)]="on_time" formControlName="on_time" (click)="selectTime()" readonly>
+			</div>
+		</div>
+	</div>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell weui-cell_select weui-cell_select-after">
+			<div class="weui-cell__hd">
+				<label class="weui-label">所在地区</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input type="text" class="weui-select" formControlName="city" [(ngModel)]="city"  (click)="selectCity()" readonly>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">详细地址</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" formControlName="detail" placeholder="请输入详细地址" />
+			</div>
+		</div>
+	</div>
+	<!-- <div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<a style="color: #f41e2d;">删除地址</a>
+			</div>
+		</div>
+	</div> -->
+	<div class="weui-btn-area">
+		<button type="submit" class="weui-btn weui-btn_primary">保存</button>
+	</div>
+</form>

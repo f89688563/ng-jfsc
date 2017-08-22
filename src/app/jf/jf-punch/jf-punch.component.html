@@ -1,0 +1,47 @@
+<div class="main" style="background: url('assets/images/Punch/back.png') no-repeat center transparent; background-size: cover;">
+	<div class="circle">
+		<div class="circle_sub">
+			<div class="day">
+				<p class="p">连续打卡</p>
+				<div class="count"><font>{{pre}}</font>天</div>
+			</div>
+		</div>
+	</div>
+	<div class="duihuan" style="background: url('assets/images/Punch/btn_back.png') no-repeat center transparent; background-size: cover;">
+		<span>{{info['jf']}}</span>
+		<span style="float: right;" routerLink="/goods">兑换</span>
+	</div>
+	<div style="text-align: center; color: #fff; margin-bottom: 30px;">连续打卡{{config[1]}}日，积分翻{{config[2]}}倍</div>
+	<div class="box">
+		<div class="num">
+			<div *ngFor="let i of values;">
+				+{{config[0]}}
+			</div>
+			<div class="mult">x{{config[2]}}</div>
+		</div>
+		<div class="line">
+			<ng-container *ngFor="let i of values">
+				<div class="active" *ngIf="pre>i"><div></div></div>
+				<div class="finish" *ngIf="pre==i"><div style="background: url('assets/images/Punch/finish.png') no-repeat center transparent;
+    				background-size: cover;"></div></div>
+				<div class="default" *ngIf="pre<i"><div></div></div>
+			</ng-container>
+		</div>
+		<div class="day">
+			<div *ngFor="let i of values">
+				<div>{{i}}天</div>
+			</div>
+			<div>{{config[1]}}天</div>
+		</div>
+	</div>
+	<div class="bottom">
+		<div class="top">
+			<div class="line"></div>
+			打卡规则
+			<div class="line"></div>
+		</div>
+		<div class="content">
+			{{config[3]}}
+		</div>
+	</div>
+</div>

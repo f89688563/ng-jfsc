@@ -1,0 +1,21 @@
+<div class="main">
+	<app-loading *ngIf="lists.length<=0"></app-loading>
+	<div class="content" *ngIf="lists.length>0">
+		<weui-infiniteloader (loadmore)="onLoadMore($event)">
+			<div class="weui-cell" *ngFor="let v of lists">
+				<div class="weui-cell__hd">
+					<label class="weui-label">{{v['name']}}</label>
+				</div>
+				<div class="weui-cell__bd">
+					{{v['create_time']*1000|date:'yyyy-MM-dd HH:mm'}}
+				</div>
+				<div class="weui-cell__ft">
+					<ng-container [ngSwitch]="v['status']">
+						<a *ngSwitchCase="0">去兑换</a>
+						<a *ngSwitchCase="1">已使用</a>
+					</ng-container>
+				</div>
+			</div>
+		</weui-infiniteloader>
+	</div>
+</div>

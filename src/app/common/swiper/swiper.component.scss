@@ -1,0 +1,10 @@
+@import "../../public/css/index.scss";
+.swiper-slide {
+    width: 100%;
+    height: pxtrem(312px);
+    text-align: center;
+    background: #fff;
+    img{
+		height: pxtrem(312px);
+    }
+}

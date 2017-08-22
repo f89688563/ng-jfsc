@@ -1,0 +1,56 @@
+<div class="weui-cells first">
+	<a class="weui-cell weui-cell_access" [routerLink]="['/user/address/oid', id]" *ngIf="address">
+		<div class="weui-cell__bd">
+			<p>{{address['username']}} {{address['phone']}}</p>
+			<p>收货地址：
+			{{address['province']}}{{address['city']}}{{address['district']}}{{address['detail']}}</p>
+			<p>{{address['on_time']}}</p>
+		</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+	<a class="weui-cell weui-cell_access none" [routerLink]="['/user/address/edit/oid', id]" *ngIf="!address">
+		<div class="weui-cell__bd">
+			<p style="margin: 0;">您还未添加收货地址，请先添加收货地址</p>
+		</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+</div>
+<div class="weui-cells weui-cells_checkbox">
+	<div class="weui-cell">
+		<div class="weui-cell__bd money">
+			<p class="main">应付金额： ¥<span>{{(info['total']*1000+fare*1000)/1000}}</span></p>
+			<p class="sub">含运费： ¥{{fare}}</p>
+		</div>
+	</div>
+</div>
+<div class="weui-cells weui-cells_checkbox">
+	<label class="weui-cell weui-check__label" *ngFor="let i of payOptions">
+        <div class="weui-cell__bd">
+            <p>
+	            <img src="{{i.img}}" class="img-min-x">
+	            <span>{{i.name}}</span>
+            </p>
+        </div>
+        <div class="weui-cell__ft">
+            <input type="radio" class="weui-check" [(ngModel)]="payType" [value]="i.id">
+            <span class="weui-icon-checked"></span>
+        </div>
+    </label>
+</div>
+<div class="weui-cells weui-cells_select store_box" [class.hidden]="!payType">
+	<div class="weui-cell weui-cell_select weui-cell_select-after">
+		<div class="weui-cell__hd">
+			<label class="weui-label">选择门店</label>
+		</div>
+		<div class="weui-cell__bd weui_cell_primary">
+			<select class="weui_select" [(ngModel)]="selectedStore">
+				<option value="{{v['id']}}" *ngFor="let v of stores" >{{v['name']}}</option>
+			</select>
+		</div>
+	</div>
+</div>
+<div class="fix-bottom-box">
+	<div class="fix-bottom-item">
+		<a (click)="confirm();" class="weui-btn weui-btn_confirm">提交订单</a>
+	</div>
+</div>

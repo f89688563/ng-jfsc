@@ -1,0 +1,56 @@
+<div class="weui-cells first">
+	<div class="weui-media-box weui-media-box_appmsg" style="background-image: url(assets/images/User/back.png)">
+		<div class="weui-media-box__hd">
+			<img src="assets/images/User/gold.png" class="img-small">
+		</div>
+		<div class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">{{info['username']}} {{info['vname']}}</h4>
+			<p class="weui-media-box__desc">
+				<a routerLink="/jf/record">积分：{{info['jf']}} </a>
+				<a style="margin-left: 14px;"> 怎么赚积分?</a>
+			</p>
+		</div>
+	</div>
+	<div class="weui-cell order">
+		<a class="weui-cell__bd" [routerLink]="['/order', {type: 'wait'}]">
+			<img class="img-middle" src="assets/images/User/pending-payment.png">
+			<p>待付款</p>
+		</a>
+		<a class="weui-cell__bd" [routerLink]="['/order', {type: 'sending'}]">
+			<img class="img-middle" src="assets/images/User/shipped.png">
+			<p>待收货</p>
+		</a>
+		<a class="weui-cell__bd" routerLink="/order">
+			<img class="img-middle" src="assets/images/User/all.png">
+			<p>全部订单</p>
+		</a>
+	</div>
+</div>
+<div class="weui-cells">
+	<a class="weui-cell weui-cell_access" routerLink="info">
+		<div class="weui-cell__bd">个人信息</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+	<a class="weui-cell weui-cell_access" routerLink="address">
+		<div class="weui-cell__bd">地址管理</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+</div>
+<div class="weui-cells">
+	<a class="weui-cell weui-cell_access" (click)="feedback()">
+		<div class="weui-cell__bd">反馈</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+	<a class="weui-cell weui-cell_access" [appKf]="info['phone']" kf="{{info['kf']}}">
+		<div class="weui-cell__bd">我的客服</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+	<a class="weui-cell weui-cell_access" routerLink="about">
+		<div class="weui-cell__bd">关于</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+	<a (click)="logout();" class="weui-cell weui-cell_access">
+		<div class="weui-cell__bd">退出登录</div>
+		<div class="weui-cell__ft"></div>
+	</a>
+</div>

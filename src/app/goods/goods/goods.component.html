@@ -1,0 +1,23 @@
+<div class="weui-cells first">
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd" style="width: auto; height: 50px; line-height: 0;">
+			<img src="assets/images/Jf/jf.png" class="img-min" />
+		</div>
+		<div class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">我的积分: 123</h4>
+			<p class="weui-media-box__desc">积分可以兑换超值奖品哟~</p>
+		</div>
+		<div class="weui-cell__ft">
+			<a class="btn_default">赚积分</a>
+			<a href="" class="btn_primary">兑换记录</a>
+		</div>
+	</div>
+</div>
+<app-loading *ngIf="items.length<=0"></app-loading>
+<weui-infiniteloader *ngIf="items.length>0" (loadmore)="onLoadMore($event)">
+	<div class="weui-cells">
+		<div class="weui-grids">
+	    	<app-goods-item *ngFor="let item of items" [item]="item"></app-goods-item>
+	    </div>
+	</div>
+</weui-infiniteloader>

@@ -1,0 +1,111 @@
+<ng-container [ngSwitch]="info['status']">
+	<div *ngSwitchCase="'wait'" class="top notice">
+		<img src="assets/images/Order/notice.png" class="img-min" />
+		<span>待付款</span>
+		<p><font>还需支付 ¥ {{info['total']}}</font></p>
+	</div>
+	<div *ngSwitchCase="'send'" class="top">
+		<img src="assets/images/Order/send.png" class="img-min" />
+		<p><font>准备发货</font></p>
+	</div>
+	<div *ngSwitchCase="'sending'" class="top">
+		<img src="assets/images/Order/send.png" class="img-min" />
+		<p><font>已发货</font> 还剩
+			<countdown (finished)="notify();" [config]="config"></countdown>
+		自动确认</p>
+	</div>
+	<div *ngSwitchCase="'cancel'" class="top cancel">
+		<div class="left">
+			<img src="assets/images/Order/circle.png">
+			<p>已下单</p>
+		</div>
+		<div class="line"></div>
+		<div class="right">
+			<img src="assets/images/Order/finish.png">
+			<p><font>已取消</font></p>
+		</div>
+	</div>
+	<div *ngSwitchCase="'refund'" class="top">
+		<img src="assets/images/Order/finish.png" class="img-min" />
+		<p><font>已退款</font></p>
+	</div>
+	<div *ngSwitchCase="'ok'" class="top">
+		<img src="assets/images/Order/finish.png" class="img-min" />
+		<p><font>已完成</font></p>
+	</div>
+</ng-container>
+<div class="weui-cells first" *ngIf="info['consignee']">
+	<div class="weui-cell__col">
+		<div>
+			<span>{{info['consignee']['username']}}</span>
+			<span style="float: right;">{{info['consignee']['phone']}}</span>
+		</div>
+		<div> {{info['consignee']['address']}} </div>
+		<div> {{info['consignee']['on_time']}} </div>
+	</div>
+</div>
+<div class="weui-cells">
+	<div class="weui-cell" style="padding-top: 15px; padding-bottom: 15px;">
+		<div class="weui-cell__bd"> <p>商品信息</p> </div>
+	</div>
+	<div class="weui-media-box weui-media-box_appmsg" *ngFor="let v of info['_detail']">
+		<div class="weui-media-box__hd">
+			<img src="{{v['corver']}}">
+		</div>
+		<div class="weui-media-box__bd">
+			<div class="weui-media-box__title">{{v['name']}}</div>
+			<div class="weui-media-box__desc" style="margin-top: 8px;">{{v['standard']}}</div>
+		</div>
+		<div class="weui-cell__ft">
+			<p style="color: #191919;">¥ {{v['price']}}</p>
+			<p>x {{v['count']}}</p>
+		</div>
+	</div>
+	<div class="weui-cell">
+		<div class="weui-cell__bd"> 运费 </div>
+		<div class="weui-cell__ft"> ¥ {{info['fare']}} </div>
+	</div>
+	<div class="no-border">
+		<div class="weui-cell" style="padding-top:0;">
+			<div class="weui-cell__bd"> 积分抵扣 </div>
+			<div class="weui-cell__ft"> ¥ {{info['jf']}} </div>
+		</div>
+	</div>
+	<div class="weui-cell">
+		<div class="weui-cell__bd"> <p>实付金额</p> </div>
+		<div class="weui-cell__ft" style="font-size: 30px; color: #000;">
+			¥ {{info['total']}}
+		</div>
+	</div>
+</div>
+<div class="weui-cells" style="bottom: 10px;">
+	<div class="weui-cell">
+		<div class="weui-cell__bd"> <p>下单编号</p> </div>
+		<div class="weui-cell__ft"> {{id}} </div>
+	</div>
+	<div class="no-border">
+		<div class="weui-cell" style="padding-top:0;">
+			<div class="weui-cell__bd">
+				下单时间
+			</div>
+			<div class="weui-cell__ft">
+				{{info['create_time']*1000 | date:'y/MM/dd HH:mm'}}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="fix-bottom-box" *ngIf="info['status']==='wait' || info['status']==='sending'">
+	<div class="fix-bottom-item">
+		<div class="confirm">
+			<ng-container [ngSwitch]="info['status']">
+				<div *ngSwitchCase="'wait'">
+					<a class="btn_default">取消订单</a>
+					<a class="btn_primary wpay">支付<span class="countdown"></span></a>
+				</div>
+				<div *ngSwitchCase="'sending'">
+					<a class="btn_primary ok">确认收货</a>
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</div>

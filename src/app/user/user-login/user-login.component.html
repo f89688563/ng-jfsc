@@ -1,0 +1,26 @@
+<form #form="ngForm" (ngSubmit)="onSave()" [@popIn]>
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell_hd">
+				<label class="weui-label">账号：</label>
+			</div>
+			<div class="weui-cell_bd">
+				<input class="weui-input" type="number" name="user" [(ngModel)]="user.user" pattern="[0-9]*" placeholder="请输入账号" required />
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell_hd">
+				<label class="weui-label">密码：</label>
+			</div>
+			<div class="weui-cell_bd">
+				<input class="weui-input" type="password" name="psw" [(ngModel)]="user.psw" placeholder="请输入密码" required />
+			</div>
+		</div>
+	</div>
+	<div class="weui-cells__title" style="text-align: right;">
+		<a routerLink="/user/register">没有账户？去注册</a>
+	</div>
+	<div class="weui-btn-area">
+		<input [class.weui-btn_disabled]="form.invalid" class="weui-btn weui-btn_primary" type="submit" value="登录" [disabled]="form.invalid" />
+	</div>
+</form>

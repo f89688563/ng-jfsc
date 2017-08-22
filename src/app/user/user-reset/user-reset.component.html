@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit();">
+	<div class="weui-cells weui-cells_form">
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">旧密码：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="password" formControlName="opsw" placeholder="请输入旧密码">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">新密码：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="password" formControlName="npsw" placeholder="请输入新密码">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">确认密码：</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" type="password" formControlName="cpsw" placeholder="请再次输入新密码">
+			</div>
+		</div>
+	</div>
+	<div class="weui-btn-area">
+		<button type="submit" class="weui-btn weui-btn_primary">保存</button>
+	</div>
+</form>

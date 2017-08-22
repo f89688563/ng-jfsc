@@ -1,0 +1,24 @@
+.my-toast-mask {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.my-toast {
+	position: fixed;
+    z-index: 5000;
+    width: 7.6em;
+    top: 22em;
+    left: 50%;
+    margin-left: -3.8em;
+    background: rgba(18, 18, 18, 0.7);
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    p {
+    	padding: .7em;
+    }
+}

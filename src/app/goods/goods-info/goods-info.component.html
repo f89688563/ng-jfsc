@@ -1,0 +1,80 @@
+<app-swiper *ngIf="corver.length>0" [data]="corver"></app-swiper>
+<!-- <a href="" class="img_detail">
+	<p>图 文</p>
+	<p>详 情</p>
+</a> -->
+<div class="weui-cells first">
+	<div class="weui-cell__col no-border">
+		<div class="weui-cell">
+			{{info['name']}}
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<span class="main" *ngIf="info['price']">¥ <span class="price">{{info['price']}}</span></span>
+				<span *ngIf="info['jf']">
+					<span *ngIf="info['price']">
+					&nbsp;+
+					</span>
+					{{info['jf']}}积分
+				</span>
+			</div>
+			<div class="weui-cell__ft">
+				<img src="{{praised ? 'assets/images/Goods/like.png' : 'assets/images/Goods/dislike.png'}}" class="phraise img-min-x" [class.like]="praised" (click)="praise()">
+				{{info['praise']}} 人点赞
+			</div>
+		</div>
+	</div>
+</div>
+<div class="weui-cells">
+	<div class="weui-cell__col no-border product">
+		<ng-container *ngFor="let _standard of _standards;index as i">
+			<div class="weui-cell" style="align-items: baseline;" *ngIf="_standard">
+				<input type="hidden" name="standard[]" value="">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">{{standard[i]['name']}}</label>
+				</div>
+				<div class="weui-cell__bd standard_parent">
+					<div *ngFor="let item of _standard" style="padding: 5px; margin: 5px;">
+						<span class="standard" [class.active]='item.active' (click)="selectType(item, i)">
+							{{standard[item['sid']]['name']}}
+						</span>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">
+					数量
+				</label>
+			</div>
+			<div class="weui-cell__bd option-box">
+				<span class="decr" (click)="changeCount('decr')">-</span>
+				<span class="count">{{goodsCount}}</span>
+				<span class="incr" (click)="changeCount('incr')">+</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="detail_title" id="detail">
+	<div class="line"></div>
+	<div class="detail">商品详情</div>
+	<div class="line"></div>
+</div>
+<!-- <div [@animation]="animationShow" style="background: red;">haha</div> -->
+<div class="weui-cells">
+	<img *ngFor="let item of info['img'] | array" src="{{item}}" alt="">
+</div>
+<div class="fix-bottom-box">
+	<div class="fix-bottom-item">
+		<a class="weui-btn weui-btn_default" routerLink="../car">
+			<img src="assets/images/Goods/car.png" class="img-min" />
+			<p>
+				购物车
+			</p>	
+			<span class="car_count" [class.hidden]="!carCount">{{carCount}}</span>
+		</a>
+		<img src="{{logo}}" [@animation]="animationShow" (@animation.done)="animationDone()" class="animation img-min" />
+		<a class="weui-btn weui-btn_confirm" (click)="toCar()">加入购物车</a>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<app-loading *ngIf="lists.length<=0"></app-loading>
+<div class="weui-cells" *ngIf="lists.length>0">
+	<weui-infiniteloader (loadmore)="onLoadMore($event)">
+		<a *ngFor="let v of lists" [routerLink]="['/activity', v['id']]" class="weui-media-box weui-media-box_appmsg weui-cell_access">
+			<div class="weui-media-box__hd">
+				<img src="{{v['logo']}}">
+			</div>
+			<div class="weui-media-box__bd">
+				<div class="weui-media-box__title">
+					{{v['name']}}
+				</div>
+			</div>
+			<div class="weui-cell__ft"></div>
+		</a>
+	</weui-infiniteloader>
+</div>

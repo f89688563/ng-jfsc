@@ -1,0 +1,28 @@
+@import "../../public/css/index.scss";
+img{
+	height: pxtrem(208px);
+	width: 100%;
+}
+.name{
+	margin-top: pxtrem(32px);
+	font-size: $lvFontHighlight;
+	color: #242424;
+}
+.detail{
+	font-size: $lvFontDefaultSub;
+	margin-top: pxtrem(8px);
+	color: #8f8f8f;
+	font{
+		color: $lvColorHighlight;
+	}
+}
+.price{
+	margin-top: pxtrem(16px);
+	font-size: $lvFontHighlight;
+	color: #FD6508;
+}
+.weui-grids {
+    .weui-grid-2{
+        width: 50%;
+    }
+}

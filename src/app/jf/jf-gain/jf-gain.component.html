@@ -1,0 +1,70 @@
+<div class="weui-cells first">
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd" style="width: auto; height: 50px;">
+			<img src="assets/images/Jf/jf.png" class="img-min" />
+		</div>
+		<div class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">我的积分: {{info['jf']}}</h4>
+			<p class="weui-media-box__desc">积分可以兑换超值奖品哟~</p>
+		</div>
+		<div class="weui-cell__ft">
+			<a routerLink="/goods" class="btn">兑换</a>
+		</div>
+	</div>
+</div>
+<div class="weui-cells">
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd" routerLink="punch">
+			<img src="assets/images/Jf/punch.png" />
+		</div>
+		<div class="weui-media-box__bd" routerLink="punch">
+			<h4 class="weui-media-box__title">每日打卡</h4>
+			<p class="weui-media-box__desc">
+				连续打卡{{config[1]}}日，积分翻{{config[2]}}倍
+			</p>
+		</div>
+		<div class="weui-cell__ft">
+			<ng-container *ngIf="day">
+				<img src="assets/images/Jf/finish.png" class="img-min-x" />
+				<span class="finish">已打卡{{pre}}天</span>
+			</ng-container>
+			<a *ngIf="!day" (click)="punch()" class="unfinish">打卡</a>
+		</div>
+	</div>
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd">
+			<img src="assets/images/Jf/redpack.png" />
+		</div>
+		<div class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">抢红包</h4>
+			<p class="weui-media-box__desc">每天免费抽大奖</p>
+		</div>
+		<div class="weui-cell__ft">
+			<a class="unfinish" routerLink="/act/red"> 抢红包 </a>
+		</div>
+	</div>
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd">
+			<img src="assets/images/Jf/zf.png" />
+		</div>
+		<div class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">转发有礼</h4>
+			<p class="weui-media-box__desc">分享好友即可活的XX积分</p>
+		</div>
+		<div class="weui-cell__ft">
+			<a class="unfinish" [routerLink]="['/activity', {share: 1}]">转发有礼</a>
+		</div>
+	</div>
+	<div class="weui-media-box weui-media-box_appmsg">
+		<div class="weui-media-box__hd">
+			<img src="assets/images/Jf/activity.png" />
+		</div>
+		<div class="weui-media-box__bd">
+			<h4 class="weui-media-box__title">活动积分</h4>
+			<p class="weui-media-box__desc">精选活动，积分等你领</p>
+		</div>
+		<div class="weui-cell__ft">
+			<a class="unfinish" routerLink="/activity">加积分</a>
+		</div>
+	</div>
+</div>

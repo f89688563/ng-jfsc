@@ -1,0 +1,56 @@
+<div class="empty" *ngIf="!lists.length">
+	<img src="assets/images/Order/order_empty.png">
+	<p>您还没有订单记录哟，去商城看看吧~</p>
+	<div class="bottom-box">
+		<a routerLink="/goods" class="weui-btn btn_primary">去逛逛</a>
+	</div>
+</div>
+<weui-infiniteloader [config]="config" (loadmore)="onLoadMore($event)" *ngIf="lists.length">
+	<div class="weui-cells" *ngFor="let v of lists">
+		<div class="weui-cell top" routerLink="{{v['id']}}">
+			<div class="weui-cell__bd">
+				订单号 {{v['id']}}
+			</div>
+			<div class="weui-cell__ft default" [class.notice]="v['status']==='wait'">
+				{{status[v['status']]}}
+			</div>
+		</div>
+		<div class="middle no-border" routerLink="{{v['id']}}">
+			<div class="weui-media-box weui-media-box_appmsg" *ngFor="let sub of v['_detail']">
+				<div class="weui-media-box__hd">
+					<img src="{{sub['corver']}}">
+				</div>
+				<div class="weui-media-box__bd">
+					<div class="weui-media-box__title">{{sub['name']}}</div>
+					<div class="weui-media-box__desc" style="margin-top: 8px;">{{sub['standard']}}</div>
+				</div>
+				<div class="weui-cell__ft">
+					<p style="color: #191919;">¥ {{sub['price']}}</p>
+					<p>x {{sub['count']}}</p>
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+				</div>
+				<div class="weui-cell__ft">
+					<span class="sub">共 <font>{{v['count']}}</font> 件商品</span>
+					<span class="main">实付款 ¥{{v['total']}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cell bottom" *ngIf="v['status']==='wait' || v['status']==='sending'">
+			<div class="weui-cell__bd"> </div>
+			<div class="weui-cell__ft">
+				<ng-container [ngSwitch]="v['status']">
+					<a class="btn_primary" (click)="pay(v)" *ngSwitchCase="'wait'">
+						付款 
+						<countdown (finished)="notify(v);" [config]="{leftTime: v['delay_time']-time, template: '$!m!分$!s!秒'}"></countdown>
+					</a>
+					<a class="btn_primary" *ngSwitchCase="'sending'">确认收货 
+						<countdown (finished)="notify(v);" [config]="{leftTime: v['confirm_time']-time, template: '$!d!天$!h!时$!m!分'}"></countdown>
+					</a>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</weui-infiniteloader>

@@ -1,0 +1,21 @@
+<div class="top">
+	<img src="assets/images/Jf/jf.png" class="img-min" /><span>我的积分</span>
+	<p>{{jf}}</p>
+</div>
+<div class="weui-cells">
+	<app-loading *ngIf="lists.length<=0"></app-loading>
+	<weui-infiniteloader *ngIf="lists.length>0" (loadmore)="onLoadMore($event)">
+		<div class="weui-media-box weui-media-box_appmsg" *ngFor="let v of lists">
+			<div class="weui-media-box__bd">
+				<h4 class="weui-media-box__title">{{v['title']}}</h4>
+				<p class="weui-media-box__desc">
+					{{v['create_time']*1000|date:'yyyy-MM-dd HH:mm'}}
+				</p>
+			</div>
+			<div class="weui-cell__ft">
+				<span *ngIf="v['jf']>0" class="in">+{{v['jf']}}</span>
+				<span *ngIf="v['jf']<0" class="out">{{v['jf']}}</span>
+			</div>
+		</div>
+	</weui-infiniteloader>
+</div>
